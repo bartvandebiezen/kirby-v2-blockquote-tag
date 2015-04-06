@@ -14,7 +14,7 @@
  * @author    Bart van de Biezen <bart@bartvandebiezen.com>
  * @link      https://github.com/bartvandebiezen/kirby-v2-blockquote-tag
  * @return    HTML
- * @version   0.1 initial release
+ * @version   0.1.1
  */
 
 kirbytext::$tags['blockquote'] = array (
@@ -32,15 +32,10 @@ kirbytext::$tags['blockquote'] = array (
 		$attribution = $tag->attr('attribution');
 		$link = $tag->attr('link');
 
-		// Set language in its attribute
-		if($language) {
-			$languageAttribute = ' lang="' . $language . '"';
-		} else {
-			$languageAttribute = '';
-		}
-
 		// Start blockquote with the optional language attribute
-		$buffer = '<blockquote class="blockquote"' . $languageAttribute . '>' . "\n";
+		$buffer = '<blockquote class="blockquote"';
+		if ($language) { $buffer .= ' lang="' . $language . '"'; }
+		$buffer .= '>' . "\n";
 
 		// The quote itself
 		$buffer .= '<div class="blockquote__quote">' . kirbytext($quote) . '</div>' . "\n";
