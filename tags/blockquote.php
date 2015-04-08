@@ -14,12 +14,13 @@
  * @author    Bart van de Biezen <bart@bartvandebiezen.com>
  * @link      https://github.com/bartvandebiezen/kirby-v2-blockquote-tag
  * @return    HTML
- * @version   0.1.1
+ * @version   0.2 Optional custom class
  */
 
 kirbytext::$tags['blockquote'] = array (
 
 	'attr' => array(
+		'class',
 		'language',
 		'attribution',
 		'link',
@@ -28,27 +29,28 @@ kirbytext::$tags['blockquote'] = array (
 	'html' => function($tag) {
 
 		$quote = $tag->attr('blockquote');
+		$class = $tag->attr('class', 'blockquote');
 		$language = $tag->attr('language');
 		$attribution = $tag->attr('attribution');
 		$link = $tag->attr('link');
 
 		// Start blockquote with the optional language attribute
-		$buffer = '<blockquote class="blockquote"';
+		$buffer = '<blockquote class="' . $class . '"';
 		if ($language) { $buffer .= ' lang="' . $language . '"'; }
 		$buffer .= '>' . "\n";
 
 		// The quote itself
-		$buffer .= '<div class="blockquote__quote">' . kirbytext($quote) . '</div>' . "\n";
+		$buffer .= '<div class="' . $class . '__quote">' . kirbytext($quote) . '</div>' . "\n";
 
 		// When attribution or link is available, place it as a cite in the blockquote footer
 		if ($attribution or $link) {
-			$buffer .= '<footer class="blockquote__footer">'. "\n" . '<cite class="blockquote__attribution">';
+			$buffer .= '<footer class="' . $class . '__footer">'. "\n" . '<cite class="' . $class . '__attribution">';
 			if ($attribution and $link) {
-				$buffer .= '<a class="blockquote__link" href="' . $link . '">' . $attribution . '</a>';
+				$buffer .= '<a class="' . $class . '__link" href="' . $link . '">' . $attribution . '</a>';
 			} elseif ($attribution) {
 				$buffer .= $attribution;
 			} elseif ($link) {
-				$buffer .= '<a class="blockquote__link" href="' . $link . '">' . $link . '</a>';
+				$buffer .= '<a class="' . $class . '__link" href="' . $link . '">' . $link . '</a>';
 			}
 			$buffer .= '</cite>' . "\n" . '</footer>' . "\n";
 		}

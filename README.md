@@ -11,7 +11,8 @@ Generates HTML5 blockquotes based on ['cite and blockquote – reloaded' from HT
 The following attributes are available:
 
 - **blockquote**: your blockquote text.
-- **language**: two-letter language code such as 'en' or 'nl'.
+- **class**: class given to the blockquote and used for naming the child elements. If no class is given, it will be 'blockquote'.
+- **language**: language code such as 'en' or 'nl'.
 - **attribution**: for reference to a person or website.
 - **link**: URL given to attribution.
 
